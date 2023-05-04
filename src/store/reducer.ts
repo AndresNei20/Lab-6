@@ -1,24 +1,24 @@
+import { Actions, AppState, QuoteActions } from "../types/store";
 
 export const reducer = (currentAction: Actions, currentState: AppState): AppState => {
-    const { action, payload } = currentAction; 
+    const {action, payload} = currentAction;
 
     switch (action) {
-        case QuoteActions.SAVE:
-            return {
+        case QuoteActions.ADD:
+            return{
                 ...currentState,
-                quotes: [...currentState.quotes, payload]
+                FavQuote:[
+                    payload,
+                    ...currentState.FavQuote,
+                ]
             }
 
-
-    
+            case QuoteActions.GET:
+                return {
+                    ...currentState,
+                    FavQuote: payload
+                }
         default:
-            return currentState;
+            return currentState
     }
 }
-
-a = {} 
-
-{ ... a }
-
-b = []
-[ ...b]

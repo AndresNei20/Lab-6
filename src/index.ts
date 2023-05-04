@@ -1,7 +1,5 @@
+import './screens/dashboard'
 import "./components/export"
-import { getApi } from "./services/getApi";
-import { AttributesCard } from "./components/card/card";
-import { apiType } from "./types/apiType";
 
 class AppContainer extends HTMLElement {
     constructor(){
@@ -9,21 +7,14 @@ class AppContainer extends HTMLElement {
         this.attachShadow({mode: "open"})
     }
 
-   async connectedCallback() {
-        const data = await getApi();
-        this.render(data)
+    connectedCallback() {
+        this.render()
     }
 
-    render(data : any) {
+    render() {
         if(this.shadowRoot){this.shadowRoot.innerHTML=``}
-        data.forEach((e: apiType) => {
-            const cards = this.ownerDocument.createElement('app-card');
-            cards.setAttribute(AttributesCard.anime, e.anime);
-            cards.setAttribute(AttributesCard.character, e.character);
-            cards.setAttribute(AttributesCard.quote, e.quote);
-            this.shadowRoot?.appendChild(cards);
-            
-        });
+        const dashboard = this.ownerDocument.createElement('app-dashboard')
+        this.shadowRoot?.appendChild(dashboard)
     }
 }
 
