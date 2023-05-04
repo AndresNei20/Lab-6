@@ -1,3 +1,6 @@
+import { addNewQuote } from "../../store/actions"
+import { dispatch } from "../../store/index"
+
 export enum AttributesCard{
     "anime" = "anime",
     "character" = "character",
@@ -52,7 +55,15 @@ export default class AppCard extends HTMLElement {
         const btn = this.ownerDocument.createElement('button');
         btn.innerText = "Add favorite"
         btn.addEventListener('click', ()=>{
-            console.log(this.anime)
+            dispatch(
+                addNewQuote({
+                    payload:{
+                        anime:String(this.anime)  ,
+                        character: String(this.character)   ,
+                        quote: String(this.quote) ,
+                    }
+                })
+            )
         })
         this.shadowRoot?.appendChild(btn);
     }
